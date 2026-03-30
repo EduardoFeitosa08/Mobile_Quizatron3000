@@ -14,6 +14,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -57,28 +59,14 @@ fun HomeScreen(navController: NavController) {
                 text = "QUIZATRON 3000",
                 fontSize = 30.sp
             )
-            TextField(
+            OutlinedTextField(
                 value = nome,
                 onValueChange = {
                     nome = it
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(60.dp)
-                    .border(
-                        1.dp, Color.Black,
-                        RoundedCornerShape(
-                            topStart = 20.dp,
-                            topEnd = 20.dp,
-                            bottomStart = 20.dp,
-                            bottomEnd = 20.dp
-                        )
-                    ),
-                label = {
-                    Text(
-                        text = "Nome"
-                    )
-                },
+                    .height(60.dp),
                 placeholder = {
                     Text(
                         text = "Digite o seu nome"
@@ -88,6 +76,12 @@ fun HomeScreen(navController: NavController) {
                     keyboardType = KeyboardType.Text
                 ),
                 shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp, bottomStart = 20.dp, bottomEnd = 20.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color.Black,
+                    unfocusedBorderColor = Color.Black,
+                    unfocusedContainerColor = Color.White,
+                    focusedContainerColor = Color.White,
+                )
             )
             Button(
                 onClick = {

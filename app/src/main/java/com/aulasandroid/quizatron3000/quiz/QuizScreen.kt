@@ -1,12 +1,11 @@
 package com.aulasandroid.quizatron3000.quiz
 
-import android.util.Log
+import android.R.attr.onClick
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,7 +16,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,8 +31,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.aulasandroid.quizatron3000.components.ImageLogo
+import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.seconds
 
 @Composable
 fun QuizScreen(questao: Questao, numeroPergunta: Int, onProximaQuestao: (Boolean) -> Unit) {
@@ -44,6 +43,10 @@ fun QuizScreen(questao: Questao, numeroPergunta: Int, onProximaQuestao: (Boolean
     )
 
     val listaDeOpcoes by viewModel.opcoes.observeAsState(emptyList())
+
+    var indiceSelecionado by remember { mutableStateOf<Int?>(null) }
+
+    var respondeu by remember { mutableStateOf(false) }
 
     Column(modifier = Modifier.padding(16.dp)) {
 
@@ -112,30 +115,37 @@ fun QuizScreen(questao: Questao, numeroPergunta: Int, onProximaQuestao: (Boolean
                     fontSize = 22.sp,
                     textAlign = TextAlign.Center
                 )
-                listaDeOpcoes.forEach{opcao ->
+                listaDeOpcoes.forEachIndexed{index, opcao ->
+                    val opcaoCorreta = opcao == questao.respostaCorreta
                     Button(
                         modifier = Modifier
                             .border(
                                 1.dp, Color(115, 115, 115, 255),
                                 RoundedCornerShape(
-                                    topStart = 10.dp,
-                                    topEnd = 10.dp,
-                                    bottomStart = 10.dp,
-                                    bottomEnd = 10.dp
+                                    topStart = 20.dp,
+                                    topEnd = 20.dp,
+                                    bottomStart = 20.dp,
+                                    bottomEnd = 20.dp
                                 )
                             )
                             .fillMaxWidth()
                             .height(50.dp),
                         onClick = {
-                            if (opcao === questao.respostaCorreta){
-                                onProximaQuestao(true)
-                            }else{
-                                onProximaQuestao(false)
+                            if (!respondeu) {
+                                indiceSelecionado = index
+                                respondeu = true
+
+                                onProximaQuestao(opcaoCorreta)
                             }
                         },
                         colors = ButtonDefaults.buttonColors(
                             contentColor = Color.Black,
-                            containerColor = Color.Transparent
+                            containerColor = when {
+                            !respondeu -> Color.Transparent //nao respondeu
+                            opcaoCorreta -> Color.Green
+                            index == indiceSelecionado -> Color.Red
+                            else -> Color.Transparent
+                        }
                         ),
                     ) {
                         Row(

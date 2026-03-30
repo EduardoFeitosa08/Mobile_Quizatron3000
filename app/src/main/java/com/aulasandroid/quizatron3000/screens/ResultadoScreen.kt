@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -73,7 +74,11 @@ fun ResultadoScreen(navController: NavController, numeroAcertos: Int, nome: Stri
             }
             Text(
                 text = "$nome acertou $numeroAcertos de 3 perguntas",
-                fontSize = 26.sp,
+                fontSize = 24.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.CenterHorizontally)
             )
         }
         Button(

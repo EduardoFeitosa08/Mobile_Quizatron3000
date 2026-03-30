@@ -8,18 +8,13 @@ import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.aulasandroid.quizatron3000.quiz.Questao
-import com.aulasandroid.quizatron3000.screens.HomeScreen
 import com.aulasandroid.quizatron3000.quiz.QuizScreen
+import com.aulasandroid.quizatron3000.screens.HomeScreen
 import com.aulasandroid.quizatron3000.screens.ResultadoScreen
 import com.aulasandroid.quizatron3000.ui.theme.Quizatron3000Theme
 
