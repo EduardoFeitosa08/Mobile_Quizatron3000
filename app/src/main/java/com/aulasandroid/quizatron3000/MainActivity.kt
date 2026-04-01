@@ -42,10 +42,10 @@ class MainActivity : ComponentActivity() {
                                 animationSpec = tween(1000)
                             )
                         }
-                    ){
-                        composable (
+                    ) {
+                        composable(
                             route = "home",
-                            ){
+                        ) {
                             HomeScreen(navController = navController)
                         }
 
@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
                         )
                         composable(
                             route = "quiz/{indice}/{nome}/{acertos}"
-                        ){
+                        ) {
                             val nome = it.arguments?.getString("nome")
                             val indice = it.arguments?.getString("indice")?.toInt() ?: 0
                             var acertos = it.arguments?.getString("acertos")?.toInt() ?: 0
@@ -85,14 +85,19 @@ class MainActivity : ComponentActivity() {
                                     }
 
                                 },
-                                numeroPergunta = indice + 1)
+                                numeroPergunta = indice + 1
+                            )
                         }
                         composable(
                             route = "resultado/{acertos}/{nome}"
-                        ){
+                        ) {
                             val acertos = it.arguments?.getString("acertos")?.toInt() ?: 0
                             val nome = it.arguments?.getString("nome")
-                            ResultadoScreen(navController = navController, numeroAcertos = acertos, nome = if (nome == "") "Você" else nome!!)
+                            ResultadoScreen(
+                                navController = navController,
+                                numeroAcertos = acertos,
+                                nome = if (nome == "") "Você" else nome!!
+                            )
                         }
                     }
                 }

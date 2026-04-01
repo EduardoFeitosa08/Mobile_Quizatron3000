@@ -1,6 +1,5 @@
 package com.aulasandroid.quizatron3000.quiz
 
-import android.R.attr.onClick
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -32,8 +31,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.aulasandroid.quizatron3000.components.ImageLogo
-import kotlinx.coroutines.delay
-import kotlin.time.Duration.Companion.seconds
 
 @Composable
 fun QuizScreen(questao: Questao, numeroPergunta: Int, onProximaQuestao: (Boolean) -> Unit) {
@@ -53,7 +50,9 @@ fun QuizScreen(questao: Questao, numeroPergunta: Int, onProximaQuestao: (Boolean
         listaDeOpcoes.forEach { opcao ->
             Button(
                 onClick = { viewModel.removerOpcao(opcao) },
-                modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp)
             ) {
                 Text(opcao)
             }
@@ -115,7 +114,7 @@ fun QuizScreen(questao: Questao, numeroPergunta: Int, onProximaQuestao: (Boolean
                     fontSize = 22.sp,
                     textAlign = TextAlign.Center
                 )
-                listaDeOpcoes.forEachIndexed{index, opcao ->
+                listaDeOpcoes.forEachIndexed { index, opcao ->
                     val opcaoCorreta = opcao == questao.respostaCorreta
                     Button(
                         modifier = Modifier
@@ -141,11 +140,11 @@ fun QuizScreen(questao: Questao, numeroPergunta: Int, onProximaQuestao: (Boolean
                         colors = ButtonDefaults.buttonColors(
                             contentColor = Color.Black,
                             containerColor = when {
-                            !respondeu -> Color.Transparent //nao respondeu
-                            opcaoCorreta -> Color.Green
-                            index == indiceSelecionado -> Color.Red
-                            else -> Color.Transparent
-                        }
+                                !respondeu -> Color.Transparent //nao respondeu
+                                opcaoCorreta -> Color.Green
+                                index == indiceSelecionado -> Color.Red
+                                else -> Color.Transparent
+                            }
                         ),
                     ) {
                         Row(

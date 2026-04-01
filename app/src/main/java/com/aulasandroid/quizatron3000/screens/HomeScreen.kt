@@ -17,7 +17,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,7 +34,7 @@ import com.aulasandroid.quizatron3000.components.ImageLogo
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    var nome by remember{
+    var nome by remember {
         mutableStateOf("")
     }
     Box(
@@ -75,7 +74,12 @@ fun HomeScreen(navController: NavController) {
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text
                 ),
-                shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp, bottomStart = 20.dp, bottomEnd = 20.dp),
+                shape = RoundedCornerShape(
+                    topStart = 20.dp,
+                    topEnd = 20.dp,
+                    bottomStart = 20.dp,
+                    bottomEnd = 20.dp
+                ),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = Color.Black,
                     unfocusedBorderColor = Color.Black,
@@ -85,11 +89,16 @@ fun HomeScreen(navController: NavController) {
             )
             Button(
                 onClick = {
-                    if(nome != ""){
+                    if (nome != "") {
                         navController.navigate(route = "quiz/0/$nome/0")
                     }
                 },
-                shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp, bottomStart = 20.dp, bottomEnd = 20.dp),
+                shape = RoundedCornerShape(
+                    topStart = 20.dp,
+                    topEnd = 20.dp,
+                    bottomStart = 20.dp,
+                    bottomEnd = 20.dp
+                ),
                 modifier = Modifier
                     .border(
                         1.dp,

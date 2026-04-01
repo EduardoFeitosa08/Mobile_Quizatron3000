@@ -86,7 +86,12 @@ fun ResultadoScreen(navController: NavController, numeroAcertos: Int, nome: Stri
                 navController.navigate(route = "home")
 
             },
-            shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp, bottomStart = 20.dp, bottomEnd = 20.dp),
+            shape = RoundedCornerShape(
+                topStart = 20.dp,
+                topEnd = 20.dp,
+                bottomStart = 20.dp,
+                bottomEnd = 20.dp
+            ),
             modifier = Modifier
                 .border(
                     1.dp,
